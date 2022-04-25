@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.controllers.UpdateScreenController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="inputNewSource" layoutX="76.0" layoutY="36.0" prefHeight="25.0" prefWidth="350.0" promptText="source" />
+            <TextField fx:id="inputNewLogin" layoutX="76.0" layoutY="112.0" prefWidth="350.0" promptText="login" />
+            <TextField fx:id="inputNewPassword" layoutX="76.0" layoutY="189.0" prefWidth="350.0" promptText="password" />
+            <Button fx:id="btUpdate" layoutX="161.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Update" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

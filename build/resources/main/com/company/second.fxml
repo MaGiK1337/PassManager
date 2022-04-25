@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="804.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.controllers.SecondScreenController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="745.0" prefWidth="839.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tablePasswords" layoutX="2.0" layoutY="6.0" prefHeight="585.0" prefWidth="972.0">
+              <columns>
+                <TableColumn fx:id="idColumn" text="Id" />
+                <TableColumn fx:id="sourceColumn" prefWidth="240.0" text="Source" />
+                  <TableColumn fx:id="userDataColumn" prefWidth="75.0" text="User data">
+                     <columns>
+                        <TableColumn fx:id="loginColumn" prefWidth="240.0" text="Login" />
+                        <TableColumn fx:id="passwordColumn" prefWidth="240.0" text="Password" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="bt1Column" prefWidth="93.0" />
+                  <TableColumn fx:id="bt2Column" prefWidth="78.0" />
+              </columns>
+            </TableView>
+            <Button fx:id="btGeneratePassword" layoutX="497.0" layoutY="711.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" text="Generate" />
+            <TextField fx:id="txGeneratedPassword" alignment="CENTER" layoutX="16.0" layoutY="731.0" prefHeight="27.0" prefWidth="450.0" promptText="pass">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="inputSource" layoutX="14.0" layoutY="635.0" prefHeight="25.0" prefWidth="228.0" promptText="source" />
+            <TextField fx:id="inputLogin" layoutX="257.0" layoutY="635.0" prefHeight="25.0" prefWidth="249.0" promptText="login" />
+            <TextField fx:id="inputPassword" layoutX="521.0" layoutY="635.0" prefHeight="25.0" prefWidth="249.0" promptText="password" />
+            <Button fx:id="btAddUserData" layoutX="788.0" layoutY="635.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Add" />
+            <Text layoutX="107.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="364.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="616.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="inputSizeGeneratedPassword" layoutX="497.0" layoutY="758.0" prefHeight="25.0" prefWidth="114.0" promptText="length (8-40 sym)" />
+            <Separator layoutX="1.0" layoutY="677.0" prefHeight="25.0" prefWidth="986.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
