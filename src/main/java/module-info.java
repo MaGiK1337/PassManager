@@ -11,4 +11,6 @@ module com.company {
     exports com.company;
     opens com.company.userdata to javafx.fxml;
     exports com.company.userdata;
+    exports com.company.DB;
+    opens com.company.DB to javafx.fxml;
 }

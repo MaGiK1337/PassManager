@@ -1,5 +1,6 @@
 package com.company.controllers;
 
+import com.company.DB.JavaToSql;
 import com.company.controllers.exchanger.ExchangerData;
 import com.company.userdata.UserData;
 import javafx.fxml.FXML;
@@ -40,7 +41,7 @@ public class UpdateScreenController implements Initializable {
         inputNewPassword.setText(dataToUpdate.getPassword());
 
         btUpdate.setOnAction(event -> {
-            updateData();
+            updateData(dataToUpdate);
             try {
                 changeWindow();
             } catch (IOException e) {
@@ -49,8 +50,9 @@ public class UpdateScreenController implements Initializable {
         });
     }
 
-    private void updateData() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "mess", ButtonType.OK);
+    private void updateData(UserData dataToUpdate) {
+        new JavaToSql().UpdatePasswordSQL(dataToUpdate.getId(),inputNewSource.getText(),inputNewLogin.getText(),inputNewPassword.getText());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Данные обновлены", ButtonType.OK);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.show();
     }

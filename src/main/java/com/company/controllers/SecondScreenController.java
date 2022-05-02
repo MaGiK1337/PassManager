@@ -1,6 +1,7 @@
 package com.company.controllers;
 
-import com.company.JavaToSql;
+import com.company.DB.JavaToSql;
+import com.company.DB.Saver;
 import com.company.controllers.exchanger.ExchangerData;
 import com.company.generator.PasswordGenerator;
 import com.company.userdata.UserData;
@@ -68,23 +69,27 @@ public class SecondScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        new Saver().saveOurFile();
         bindButtons();
         showListOfPasswords();
         bindColumns();
     }
 
-    private final ObservableList<UserData> items = FXCollections.observableArrayList();
+    private ObservableList<UserData> items = FXCollections.observableArrayList();
 
     private void addUserData(String text, String inputLoginText, String inputPasswordText){
-        // TODO: 15.03.2022 Добавление ресурс/логин/пароль в бд
-        JavaToSql javaToSql = new JavaToSql();
-        javaToSql.SearchDriver();
-        javaToSql.TestConnection();
-        javaToSql.AddToSQL(text, inputLoginText, inputPasswordText);
-        boolean isSuccess = false;
-        if(isSuccess){
-            alertMess("Данные успешно добавлены!");
-        } else {
+        try {
+            JavaToSql javaToSql = new JavaToSql();
+            javaToSql.SearchDriver();
+            javaToSql.TestConnection();
+            if(javaToSql.AddToSQL(text, inputLoginText, inputPasswordText)){
+                alertMess("Данные успешно добавлены!");
+                showListOfPasswords();
+            }else {
+                alertMess("Ваш пароль присутствует в слитых базах данных!\nПридумайте другой пароль.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             alertMess("Ваш пароль присутствует в слитых базах данных!\nПридумайте другой пароль.");
         }
     }
@@ -96,7 +101,6 @@ public class SecondScreenController implements Initializable {
     }
 
     private void showListOfPasswords(){
-        // TODO: 15.03.2022 Вывод на экран список паролей
         bindData();
         tablePasswords.setItems(items);
     }
@@ -161,7 +165,6 @@ public class SecondScreenController implements Initializable {
                                 int id = this.getIndex();
 
                                 if(Objects.equals(nameBt, "Обновить")){
-                                    // TODO: 17.04.2022 Создать окно для обновления данных
                                     try {
                                         ExchangerData.item = items.get(id);
                                         changeWindow();
@@ -169,8 +172,8 @@ public class SecondScreenController implements Initializable {
                                         e.printStackTrace();
                                     }
                                 } else if(Objects.equals(nameBt, "Удалить")){
-                                    deleteDataById(id);
-                                    alertMess(nameBt + " " + id);
+                                    alertMess("Данные удалены");
+                                    deleteDataById(items.get(id).getId());
                                 }
                             });
                             setGraphic(btn);
@@ -183,13 +186,12 @@ public class SecondScreenController implements Initializable {
     }
 
     private void deleteDataById(int id) {
-        // TODO: 17.04.2022 Удаление данных по ID
+        new JavaToSql().deleteFromSQL(id);
+        showListOfPasswords();
     }
 
     private void bindData() {
-        for (int i = 0; i < 5; i++){
-            items.add(new UserData(i, "kek_" + i, "lol_" + i, "azaz_" + i));
-        }
+        items = new JavaToSql().takeAllTable();
     }
 
     private void changeWindow() throws IOException {

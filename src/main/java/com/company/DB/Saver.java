@@ -1,4 +1,4 @@
-package com.company;
+package com.company.DB;
 
 import java.io.*;
 import java.net.URL;
@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 
 public class Saver {
-    private String URL = "https://github.com/berandal666/Passwords/blob/master/10k_most_common.txt";
-    private String txt = "10k_most_common.txt";
+    private final String txt = "10k_most_common.txt";
     public void saveOurFile() {
         try {
+            String URL = "https://github.com/berandal666/Passwords/blob/master/10k_most_common.txt";
             URL website = new URL(URL);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
             FileOutputStream fos = new FileOutputStream(txt);
@@ -26,25 +26,19 @@ public class Saver {
         }
     }
 
-    public void checkInFile(){
-        try {
+    public void checkInFile(String newPassword) throws IOException {
             Scanner sc = new Scanner(Paths.get(txt));
-            String Password = "dave1";
             String newLine;
             while(sc.hasNextLine()){
                 String line = sc.nextLine();
-                Pattern pattern = Pattern.compile(".*" + Password + ".*");
+                Pattern pattern = Pattern.compile(".*" + newPassword + ".*");
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()){
-                    newLine = line.substring(line.indexOf(Password));
+                    newLine = line.substring(line.indexOf(newPassword));
                     System.out.println(newLine);
-                    break;
+                    throw new IOException();
                 }
-
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 }

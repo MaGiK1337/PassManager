@@ -1,5 +1,6 @@
 package com.company.controllers;
 
+import com.company.DB.JavaToSql;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,27 +13,36 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.company.HelloApplication.mainStage;
 
 public class HelloController implements Initializable {
-
-    private final boolean isExist = true;
+    String MasterKey;
 
     private boolean createMasterKey(String newMasterKey){
-        // TODO: 15.03.2022 Создание MasterKey
-        return newMasterKey.length() >= 8;
+        new JavaToSql().addMasterKey(newMasterKey);
+        MasterKey = newMasterKey;
+        return true;
     }
 
     private boolean checkMasterKeyCorrect(String masterKey){
-        // TODO: 15.03.2022 Проверка на корректность MasterKey
-        return masterKey.equals("key");
+        if (Objects.equals(MasterKey, "")){
+            return true;
+        }else{
+            return Objects.equals(MasterKey, masterKey);
+        }
     }
 
     private boolean checkExistenceMasterKey(){
-        // TODO: 15.03.2022 Проверка существования MasterKey
-        return isExist;
+        if (Objects.equals(new JavaToSql().checkMasterPassword(), "")){
+            MasterKey = "";
+            return false;
+        }else{
+            MasterKey = new JavaToSql().checkMasterPassword();
+            return true;
+        }
     }
 
     private void changeWindow() throws IOException {
@@ -74,30 +84,23 @@ public class HelloController implements Initializable {
 
     private void bindButtons() {
         btEnterRegMasterKey.setOnAction(event -> {
-            try {
-                changeWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(!inputMasterKey.getText().isEmpty()){
+                try {
+                    if (!Objects.equals(MasterKey, "")) {
+                        if (checkMasterKeyCorrect(inputMasterKey.getText()))
+                            changeWindow();
+                        else
+                            alertWrongPass();
+                    } else {
+                        if(createMasterKey(inputMasterKey.getText()))
+                            changeWindow();
+                    }
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                alertWrongPass();
             }
-//            if(!inputMasterKey.getText().isEmpty()){
-//                try {
-//                    if (isExist) {
-//                        if (checkMasterKeyCorrect(inputMasterKey.getText()))
-//                            changeWindow();
-//                        else
-//                            alertWrongPass();
-//                    } else {
-//                        if(createMasterKey(inputMasterKey.getText()))
-//                            changeWindow();
-//                    }
-//
-//                }catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
-//                alertWrongPass();
-//            }
-
         });
     }
 

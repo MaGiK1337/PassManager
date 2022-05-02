@@ -1,7 +1,12 @@
-package com.company;
+package com.company.DB;
 
+import com.company.userdata.UserData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.IOException;
 import java.sql.*;
-import java.util.Scanner;
+
 
 public class JavaToSql {
 
@@ -9,7 +14,6 @@ public class JavaToSql {
     private static final String LOGIN = "root";
     private static final String PASSWORD = "kN2&nAb78QyT!";
 
-    private static Scanner sc = new Scanner(System.in);
     private static Connection connection;
     private static PreparedStatement preparedStatement;
     private static Statement statement;
@@ -17,7 +21,6 @@ public class JavaToSql {
     public void SearchDriver() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Driver found");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -26,29 +29,24 @@ public class JavaToSql {
     public void TestConnection() {
             try {
                 connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-                if (!connection.isClosed()) {
-                    System.out.println("Connection successful");
-                } else {
-                    System.out.println("Connection failure");
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
     }
 
-    public void AddToSQL(String text, String inputLoginText, String inputPasswordText){
+    public boolean AddToSQL(String text, String inputLoginText, String inputPasswordText){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             preparedStatement = connection.prepareStatement("INSERT INTO passwords(resourceName, userLogin, userPassword) VALUES(?,?,?)");
-            String newResourceName = text;
-            String newLoginName = inputLoginText;
-            String newPassword = inputPasswordText;
-            preparedStatement.setString(1, newResourceName);
-            preparedStatement.setString(2, newLoginName);
-            preparedStatement.setString(3, newPassword);
+            new Saver().checkInFile(inputPasswordText);
+            preparedStatement.setString(1, text);
+            preparedStatement.setString(2, inputLoginText);
+            preparedStatement.setString(3, inputPasswordText);
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+            return true;
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
+            return false;
         }finally {
             try{
                 connection.close();
@@ -59,14 +57,14 @@ public class JavaToSql {
         }
     }
 
-    public void UpdatePasswordSQL(){
+    public void UpdatePasswordSQL(int id, String source, String login, String password){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            preparedStatement = connection.prepareStatement("UPDATE passwords SET userPassword = ? WHERE Id = ?");
-            int id = sc.nextInt();
-            String newPassword = sc.next();
-            preparedStatement.setInt(2,id);
-            preparedStatement.setString(1,newPassword);
+            preparedStatement = connection.prepareStatement("UPDATE passwords SET userPassword = ?, resourceName = ?, userLogin = ? WHERE Id = ? ");
+            preparedStatement.setInt(4,id);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, source);
+            preparedStatement.setString(3, login);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,11 +78,10 @@ public class JavaToSql {
         }
     }
 
-    public void deleteFromSQL(){
+    public void deleteFromSQL(int id){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             preparedStatement = connection.prepareStatement("DELETE FROM passwords WHERE Id = ?");
-            int id = sc.nextInt();
             preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -119,17 +116,15 @@ public class JavaToSql {
         }
         if (check == null){
             check = "";
-            System.out.println(check);
         }
         return check;
     }
 
-    public void addMasterKey(){
+    public void addMasterKey(String masterKey){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             preparedStatement = connection.prepareStatement("INSERT INTO masterpassword(userMasterPassword) VALUES(?)");
-            String newMasterPassword = sc.next();
-            preparedStatement.setString(1, newMasterPassword);
+            preparedStatement.setString(1, masterKey);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -142,17 +137,24 @@ public class JavaToSql {
             }
         }
     }
-    public void takeAllTable(){
+    public ObservableList<UserData> takeAllTable(){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM passwords");
+
+            final ObservableList<UserData> items = FXCollections.observableArrayList();
+
+
             while (resultSet.next()){
-                System.out.println(resultSet.getInt(1) + resultSet.getString(2) + resultSet.getString(3) + resultSet.getString(4));
+                items.add(new UserData(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4)));
             }
+            return items;
         } catch (SQLException e) {
             e.printStackTrace();
+            return FXCollections.observableArrayList();
         }
+
     }
 }
 
