@@ -13,19 +13,20 @@ import java.util.regex.Pattern;
 public class Saver {
     private final String txt = "10k_most_common.txt";
     public void saveOurFile() {
-        try {
-            String URL = "https://github.com/berandal666/Passwords/blob/master/10k_most_common.txt";
-            URL website = new URL(URL);
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream(txt);
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-            fos.close();
-            rbc.close();
+        if (!new File(txt).exists()) {
+            try {
+                String URL = "https://github.com/berandal666/Passwords/blob/master/10k_most_common.txt";
+                URL website = new URL(URL);
+                ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+                FileOutputStream fos = new FileOutputStream(txt);
+                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+                fos.close();
+                rbc.close();
             } catch (IOException e) {
-            e.printStackTrace();
+                e.printStackTrace();
+            }
         }
     }
-
     public void checkInFile(String newPassword) throws IOException {
             Scanner sc = new Scanner(Paths.get(txt));
             String newLine;
