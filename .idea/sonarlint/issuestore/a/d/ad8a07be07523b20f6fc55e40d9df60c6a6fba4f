@@ -1,10 +1,0 @@
-
-h	java:S116"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ςΏ‘αÿÿÿÿÿ
-S	java:S106("9Replace this use of System.out or System.err by a logger.(ΖΦ‹νώÿÿÿÿ
-k	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚δª³ώÿÿÿÿ
-[
-java:S2095"EUse try-with-resources or close this "Scanner" in a "finally" clause.(έ¶θ
-l
-java:S2095"QUse try-with-resources or close this "ReadableByteChannel" in a "finally" clause.(ΡΖ¦ÿÿÿÿÿ
-c
-java:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(τΪν

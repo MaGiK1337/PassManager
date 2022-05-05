@@ -6,10 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/*
+@authors Коваленко Станислав и Баженов Александр
+Входная точка оконного Desktop-приложения в которой запускается входной экран
+ */
 public class HelloApplication extends Application {
 
      public static Stage mainStage;
 
+    // Метод открытия первого окна
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("first.fxml"));
@@ -20,7 +25,9 @@ public class HelloApplication extends Application {
         mainStage = stage;
         stage.show();
     }
-
+    /*
+        Метод, который запускает приложение
+     */
     public static void main(String[] args) {
         launch();
     }

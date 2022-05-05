@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static com.company.HelloApplication.mainStage;
 import static java.lang.Integer.parseInt;
-
+// Класс, который отвечает за 2-ое окно, которое сохраняет и выводит данные, и генерирует пароль
 public class SecondScreenController implements Initializable {
 
     @FXML
@@ -66,7 +66,7 @@ public class SecondScreenController implements Initializable {
 
     @FXML
     private TextField txGeneratedPassword;
-
+    //Функция, которая инциализирует данные
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Saver().saveOurFile();
@@ -76,7 +76,7 @@ public class SecondScreenController implements Initializable {
     }
 
     private ObservableList<UserData> items = FXCollections.observableArrayList();
-
+    // Функция, которая добавляет пользовательские данные в БД и проверяет компрометацию пароля
     private void addUserData(String text, String inputLoginText, String inputPasswordText){
         try {
             JavaToSql javaToSql = new JavaToSql();
@@ -93,18 +93,18 @@ public class SecondScreenController implements Initializable {
             alertMess("Ваш пароль присутствует в слитых базах данных!\nПридумайте другой пароль.");
         }
     }
-
+    // Функция, которая вызывает alert с определенным сообщением
     private void alertMess(String mess) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, mess, ButtonType.OK);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.show();
     }
-
+    // Функция, которая выводит таблицу пользовательских данных
     private void showListOfPasswords(){
         bindData();
         tablePasswords.setItems(items);
     }
-
+    // Функция, которая устанавливает слушатели нажатий
     private void bindButtons() {
         btAddUserData.setOnAction(event -> {
             if(!inputLogin.getText().isEmpty() && !inputPassword.getText().isEmpty() && !inputSource.getText().isEmpty())
@@ -112,40 +112,35 @@ public class SecondScreenController implements Initializable {
         });
         btGeneratePassword.setOnAction(event -> {
             if(!inputSizeGeneratedPassword.getText().isEmpty())
-                generatePassword( parseInt( inputSizeGeneratedPassword.getText() ) );
+                generatePassword(parseInt( inputSizeGeneratedPassword.getText()));
             else
                 generatePassword(8);
         });
     }
-
+    // Функция, которая генерирует пароль определенной длины и на вход получает длину пароля
     private void generatePassword(int sizePass) {
-
         if(sizePass > 7 && sizePass < 41){
             PasswordGenerator pg = new PasswordGenerator();
             String generatedPass = pg.generatePassword(sizePass);
             txGeneratedPassword.setText(generatedPass);
         }
     }
-
+    // Функция, которая инциализирует данные таблицы
     private void bindColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         sourceColumn.setCellValueFactory(new PropertyValueFactory<>("source"));
         loginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-
         bindButtonsInColumns();
-
     }
-
+    // Функция, которая инициализирует кнопки в таблице
     private void bindButtonsInColumns() {
         bt1Column.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
         bt1Column.setCellFactory(cellFactory("Обновить"));
-
         bt2Column.setCellValueFactory(new PropertyValueFactory<>("DUMMY2"));
         bt2Column.setCellFactory(cellFactory("Удалить"));
-
     }
-
+    // Сущность, которая создает custom button для таблицы
     private Callback<TableColumn<UserData, String>, TableCell<UserData, String>> cellFactory(String nameBt){
         return new Callback<>() {
             @Override
@@ -160,10 +155,8 @@ public class SecondScreenController implements Initializable {
                         if (empty) {
                             setGraphic(null);
                         } else {
-
                             btn.setOnAction(event -> {
                                 int id = this.getIndex();
-
                                 if(Objects.equals(nameBt, "Обновить")){
                                     try {
                                         ExchangerData.item = items.get(id);
@@ -184,23 +177,21 @@ public class SecondScreenController implements Initializable {
             }
         };
     }
-
+    // Функция, которая удаляет строку в БД по определенному id
     private void deleteDataById(int id) {
         new JavaToSql().deleteFromSQL(id);
         showListOfPasswords();
     }
-
+    //Функция, которая обновляет таблицу
     private void bindData() {
         items = new JavaToSql().takeAllTable();
     }
-
+    //Функция, которая меняет 2-ое окно на 3-е
     private void changeWindow() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/company/update.fxml"));
-
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         mainStage.setScene(scene);
         mainStage.show();
     }
-
 }
 

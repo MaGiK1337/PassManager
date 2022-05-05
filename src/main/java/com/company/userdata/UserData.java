@@ -1,17 +1,15 @@
 package com.company.userdata;
-
+// Класс, который хранит данные пользователя
 public class UserData{
     private int id;
     private String source, login, password;
-
+    // Конструктор данного класса
     public UserData(int id, String source, String login, String password) {
         this.id = id;
         this.source = source;
         this.login = login;
         this.password = password;
     }
-
-
     public int getId() {
         return id;
     }
