@@ -7,7 +7,9 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.sql.*;
 
-// Класс, который обеспечивает взаимодействие с БД через JDBC
+/**
+ *  Класс, который обеспечивает взаимодействие с БД через JDBC
+ */
 public class JavaToSql {
 
     private final String URL = "jdbc:mysql://localhost:3306/userData";
@@ -17,7 +19,10 @@ public class JavaToSql {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private Statement statement;
-    // Функция, которая проверяет, подключен ли драйвер JDBC
+
+    /**
+     *  Функция, которая проверяет, подключен ли драйвер JDBC
+     */
     public void SearchDriver() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,7 +30,10 @@ public class JavaToSql {
             e.printStackTrace();
         }
     }
-    // Функция, которая проверяет подключение к БД
+
+    /**
+     * Функция, которая проверяет подключение к БД
+     */
     public void TestConnection() {
             try {
                 connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -33,7 +41,14 @@ public class JavaToSql {
                 e.printStackTrace();
             }
     }
-    // Функция, которая добавляет в БД новые данные пользователя
+
+    /**
+     *  Функция, которая добавляет в БД новые данные пользователя
+     * @param text
+     * @param inputLoginText
+     * @param inputPasswordText
+     * @return
+     */
     public boolean AddToSQL(String text, String inputLoginText, String inputPasswordText){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -56,7 +71,14 @@ public class JavaToSql {
             }
         }
     }
-    // Функция, которая обновляет пароль в БД по id
+
+    /**
+     *  Функция, которая обновляет пароль в БД по id
+     * @param id
+     * @param source
+     * @param login
+     * @param password
+     */
     public void UpdatePasswordSQL(int id, String source, String login, String password){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -77,7 +99,11 @@ public class JavaToSql {
             }
         }
     }
-    // Функция, которая удаляет данные в БД по id
+
+    /**
+     *  Функция, которая удаляет данные в БД по id
+     * @param id
+     */
     public void deleteFromSQL(int id){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -95,7 +121,11 @@ public class JavaToSql {
             }
         }
     }
-    //Функция, которая проверяет наличие мастер пароля в БД и возвращает либо "", либо мастер пароль
+
+    /**
+     * Функция, которая проверяет наличие мастер пароля в БД и возвращает либо "", либо мастер пароль
+     * @return
+     */
     public String checkMasterPassword() {
         String check = null;
         try {
@@ -119,7 +149,11 @@ public class JavaToSql {
         }
         return check;
     }
-    // Функция, которая добавляет в БД мастер пароль
+
+    /**
+     * Функция, которая добавляет в БД мастер пароль
+     * @param masterKey
+     */
     public void addMasterKey(String masterKey){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -137,7 +171,11 @@ public class JavaToSql {
             }
         }
     }
-    // Функция, котоорая получает всю таблицу из БД и возвращает ее в виде ObservableList<UserData>
+
+    /**
+     *  Функция, котоорая получает всю таблицу из БД и возвращает ее в виде ObservableList<UserData>
+     * @return
+     */
     public ObservableList<UserData> takeAllTable(){
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);

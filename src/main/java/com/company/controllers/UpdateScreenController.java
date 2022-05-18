@@ -17,7 +17,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.company.HelloApplication.mainStage;
-// Класс, который отвечает за 3-е окно и обновление данных в БД
+
+/**
+ *  Класс, который отвечает за 3-е окно и обновление данных в БД
+ */
 public class UpdateScreenController implements Initializable {
 
     @FXML
@@ -31,7 +34,12 @@ public class UpdateScreenController implements Initializable {
 
     @FXML
     private TextField inputNewSource;
-    //Функция, которая инциализирует данные и устанавливает слушатель кнопки
+
+    /**
+     * Функция, которая инциализирует данные и устанавливает слушатель кнопки
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserData dataToUpdate = ExchangerData.item;
@@ -47,14 +55,22 @@ public class UpdateScreenController implements Initializable {
             }
         });
     }
-    // Функция, которая обновляет данные и выводит на экран alert об обновлении данных
+
+    /**
+     *  Функция, которая обновляет данные и выводит на экран alert об обновлении данных
+     * @param dataToUpdate
+     */
     private void updateData(UserData dataToUpdate) {
         new JavaToSql().UpdatePasswordSQL(dataToUpdate.getId(),inputNewSource.getText(),inputNewLogin.getText(),inputNewPassword.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Данные обновлены", ButtonType.OK);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.show();
     }
-    // Функция, которая меняет 3-е окно на 2-ое
+
+    /**
+     *  Функция, которая меняет 3-е окно на 2-ое
+     * @throws IOException
+     */
     private void changeWindow() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/company/second.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 925, 800);

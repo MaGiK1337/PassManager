@@ -13,3 +13,5 @@ Qmysql-connector-java-8.0.28/src/main/user-impl/java/com/mysql/cj/jdbc/Driver.ja
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+N
+src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7

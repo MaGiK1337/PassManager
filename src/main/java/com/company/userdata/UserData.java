@@ -1,9 +1,19 @@
 package com.company.userdata;
-// Класс, который хранит данные пользователя
+
+/**
+ * Класс, который хранит данные пользователя
+ */
 public class UserData{
     private int id;
     private String source, login, password;
-    // Конструктор данного класса
+
+    /**
+     *  Конструктор данного класса
+     * @param id
+     * @param source
+     * @param login
+     * @param password
+     */
     public UserData(int id, String source, String login, String password) {
         this.id = id;
         this.source = source;

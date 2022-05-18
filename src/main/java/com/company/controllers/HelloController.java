@@ -17,18 +17,23 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import static com.company.HelloApplication.mainStage;
 
-// Класс, который является первым окном и отвечает за создание Мастер пароля или вход по нему
+/**
+ * Класс, который является первым окном и отвечает за создание Мастер пароля или вход по нему
+ */
 public class HelloController implements Initializable {
     String MasterKey;
 
-    // Функция, которая создает мастер пароль, при создании возвращает параметр true
+    /**
+     * Функция, которая создает мастер пароль, при создании возвращает параметр true
+     */
     private boolean createMasterKey(String newMasterKey){
         new JavaToSql().addMasterKey(newMasterKey);
         MasterKey = newMasterKey;
         return true;
     }
-    // Функция, которая проверяет корректность введенного мастер-пароля
-    // и возвращает булевую переменную "Корректен ли мастер пароль"
+    /** Функция, которая проверяет корректность введенного мастер-пароля
+     * и возвращает булевую переменную "Корректен ли мастер пароль"
+     */
     private boolean checkMasterKeyCorrect(String masterKey){
         if (Objects.equals(MasterKey, "")){
             return true;
@@ -36,8 +41,9 @@ public class HelloController implements Initializable {
             return Objects.equals(MasterKey, masterKey);
         }
     }
-    // Функция проверяет, существует ли мастер пароль и возвращает булевую переменную
-    // Существует - true, не существует - false
+    /** Функция проверяет, существует ли мастер пароль и возвращает булевую переменную
+     * Существует - true, не существует - false
+    */
     private boolean checkExistenceMasterKey(){
         if (Objects.equals(new JavaToSql().checkMasterPassword(), "")){
             MasterKey = "";
@@ -47,7 +53,11 @@ public class HelloController implements Initializable {
             return true;
         }
     }
-    // Функция, которая меняет 1-ое окно на 2-ое
+
+    /**
+     * Функция, которая меняет 1-ое окно на 2-ое
+     * @throws IOException
+     */
     private void changeWindow() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/company/second.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 925, 800);
@@ -64,13 +74,20 @@ public class HelloController implements Initializable {
     @FXML
     private Text txEnterRegMasterKey;
 
-    // Функция инциализации данных
+    /** Функция инциализации данных
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkMasterKeyFunc();
         bindButtons();
     }
-    // Функция, которая задает текст UI элементов
+
+    /**
+     * Функция, которая задает текст UI элементов
+     */
     private void checkMasterKeyFunc() {
         if(checkExistenceMasterKey()){
             txEnterRegMasterKey.setText("Enter MasterKey");
@@ -80,10 +97,13 @@ public class HelloController implements Initializable {
             btEnterRegMasterKey.setText("Create");
         }
     }
-    // Функция, которая:
-    // 1) Создает мастер пароль, если он не существует
-    // 2) Открывает 2-ое окно, если мастер пароль корректный
-    // 3) Вызывает alert о неверном мастер пароле, если он некорректный
+
+    /**
+     * Функция, которая:
+     * 1) Создает мастер пароль, если он не существует
+     * 2) Открывает 2-ое окно, если мастер пароль корректный
+     * 3) Вызывает alert о неверном мастер пароле, если он некорректный
+     */
     private void bindButtons() {
         btEnterRegMasterKey.setOnAction(event -> {
             if(!inputMasterKey.getText().isEmpty()){
@@ -105,7 +125,10 @@ public class HelloController implements Initializable {
             }
         });
     }
-    //Функция, которая выводит сообщение о неверном мастер пароле
+
+    /**
+     * Функция, которая выводит сообщение о неверном мастер пароле
+     */
     private void alertWrongPass() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Неверный MasterKey!", ButtonType.OK);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);

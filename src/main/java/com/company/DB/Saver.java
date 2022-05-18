@@ -9,10 +9,15 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Класс, который отвечает за скачивание файла с паролями и проверку в нем значений, совпадающих с нашим новым паролем
+/**
+ * Класс, который отвечает за скачивание файла с паролями и проверку в нем значений, совпадающих с нашим новым паролем
+ */
 public class Saver {
     private final String txt = "10k_most_common.txt";
-    // Функция, которая скачивает текстовый файл с паролями по URL
+
+    /**
+     *  Функция, которая скачивает текстовый файл с паролями по URL
+     */
     public void saveOurFile() {
         if (!new File(txt).exists()) {
             try {
@@ -28,7 +33,12 @@ public class Saver {
             }
         }
     }
-    // Функция, которая проверяет наш пароль в файле с паролями
+
+    /**
+     *  Функция, которая проверяет наш пароль в файле с паролями
+     * @param newPassword
+     * @throws IOException
+     */
     public void checkInFile(String newPassword) throws IOException {
             Scanner sc = new Scanner(Paths.get(txt));
             String newLine;
