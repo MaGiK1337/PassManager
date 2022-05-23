@@ -26,7 +26,10 @@ import java.util.ResourceBundle;
 
 import static com.company.HelloApplication.mainStage;
 import static java.lang.Integer.parseInt;
-// Класс, который отвечает за 2-ое окно, которое сохраняет и выводит данные, и генерирует пароль
+
+/**
+ * Класс, который отвечает за 2-ое окно, которое сохраняет и выводит данные, и генерирует пароль
+ */
 public class SecondScreenController implements Initializable {
 
     @FXML
@@ -234,7 +237,7 @@ public class SecondScreenController implements Initializable {
         items = new JavaToSql().takeAllTable();
         tablePasswords.getSelectionModel().setCellSelectionEnabled(true);
         tablePasswords.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        MenuItem item = new MenuItem("Copy");
+        MenuItem item = new MenuItem("Копировать");
         item.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

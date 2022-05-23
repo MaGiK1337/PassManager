@@ -18,13 +18,13 @@ import java.util.ResourceBundle;
 import static com.company.HelloApplication.mainStage;
 
 /**
- * Класс, который является первым окном и отвечает за создание Мастер пароля или вход по нему
+ * Класс, который является первым окном и отвечает за создание мастер-пароля или вход по нему
  */
 public class HelloController implements Initializable {
     String MasterKey;
 
     /**
-     * Функция, которая создает мастер пароль, при создании возвращает параметр true
+     * Функция, которая создает мастер-пароль, при создании возвращает параметр true
      */
     private boolean createMasterKey(String newMasterKey){
         new JavaToSql().addMasterKey(newMasterKey);
@@ -32,7 +32,7 @@ public class HelloController implements Initializable {
         return true;
     }
     /** Функция, которая проверяет корректность введенного мастер-пароля
-     * и возвращает булевую переменную "Корректен ли мастер пароль"
+     * и возвращает булевую переменную "Корректен ли мастер-пароль"
      */
     private boolean checkMasterKeyCorrect(String masterKey){
         if (Objects.equals(MasterKey, "")){
@@ -41,7 +41,7 @@ public class HelloController implements Initializable {
             return Objects.equals(MasterKey, masterKey);
         }
     }
-    /** Функция проверяет, существует ли мастер пароль и возвращает булевую переменную
+    /** Функция проверяет, существует ли мастер-пароль и возвращает булевую переменную
      * Существует - true, не существует - false
     */
     private boolean checkExistenceMasterKey(){
@@ -90,11 +90,11 @@ public class HelloController implements Initializable {
      */
     private void checkMasterKeyFunc() {
         if(checkExistenceMasterKey()){
-            txEnterRegMasterKey.setText("Enter MasterKey");
-            btEnterRegMasterKey.setText("Enter");
+            txEnterRegMasterKey.setText("Введите мастер-пароль");
+            btEnterRegMasterKey.setText("Ввести");
         } else {
-            txEnterRegMasterKey.setText("Create MasterKey");
-            btEnterRegMasterKey.setText("Create");
+            txEnterRegMasterKey.setText("Создайте мастер-пароль");
+            btEnterRegMasterKey.setText("Создать");
         }
     }
 
@@ -102,7 +102,7 @@ public class HelloController implements Initializable {
      * Функция, которая:
      * 1) Создает мастер пароль, если он не существует
      * 2) Открывает 2-ое окно, если мастер пароль корректный
-     * 3) Вызывает alert о неверном мастер пароле, если он некорректный
+     * 3) Вызывает alert о неверном мастер-пароле, если он некорректный
      */
     private void bindButtons() {
         btEnterRegMasterKey.setOnAction(event -> {
@@ -127,7 +127,7 @@ public class HelloController implements Initializable {
     }
 
     /**
-     * Функция, которая выводит сообщение о неверном мастер пароле
+     * Функция, которая выводит сообщение о неверном мастер-пароле
      */
     private void alertWrongPass() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Неверный MasterKey!", ButtonType.OK);

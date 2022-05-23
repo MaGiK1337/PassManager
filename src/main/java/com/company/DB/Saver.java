@@ -21,7 +21,7 @@ public class Saver {
     public void saveOurFile() {
         if (!new File(txt).exists()) {
             try {
-                String URL = "https://github.com/berandal666/Passwords/blob/master/10k_most_common.txt";
+                String URL = "https://raw.githubusercontent.com/berandal666/Passwords/master/10k_most_common.txt";
                 URL website = new URL(URL);
                 ReadableByteChannel rbc = Channels.newChannel(website.openStream());
                 FileOutputStream fos = new FileOutputStream(txt);

@@ -15,3 +15,7 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+r
+Bsrc/main/java/com/company/controllers/exchanger/ExchangerData.java,c\2\c25379afbb3b72d353a69f24a19168b00653723c
+C
+10k_most_common.txt,4\f\4f69cd5900774b91147f9cfe114c60d60201a23f

@@ -9,10 +9,10 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="inputNewSource" layoutX="76.0" layoutY="36.0" prefHeight="25.0" prefWidth="350.0" promptText="source" />
-            <TextField fx:id="inputNewLogin" layoutX="76.0" layoutY="112.0" prefWidth="350.0" promptText="login" />
-            <TextField fx:id="inputNewPassword" layoutX="76.0" layoutY="189.0" prefWidth="350.0" promptText="password" />
-            <Button fx:id="btUpdate" layoutX="161.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Update" />
+            <TextField fx:id="inputNewSource" layoutX="76.0" layoutY="36.0" prefHeight="25.0" prefWidth="350.0" promptText="ресурс" />
+            <TextField fx:id="inputNewLogin" layoutX="76.0" layoutY="112.0" prefWidth="350.0" promptText="логин" />
+            <TextField fx:id="inputNewPassword" layoutX="76.0" layoutY="189.0" prefWidth="350.0" promptText="пароль" />
+            <Button fx:id="btUpdate" layoutX="161.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Обновить" />
          </children>
     </AnchorPane>
   </children>

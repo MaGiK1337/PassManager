@@ -12,7 +12,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Text fx:id="txEnterRegMasterKey" fill="#dd0000" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter MasterKey" textAlignment="CENTER" wrappingWidth="150.0">
+      <Text fx:id="txEnterRegMasterKey" fill="#dd0000" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите мастер-пароль" textAlignment="CENTER" wrappingWidth="150.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -22,6 +22,6 @@
             <Insets left="45.0" right="45.0" />
          </VBox.margin>
       </TextField>
-      <Button fx:id="btEnterRegMasterKey" mnemonicParsing="false" text="Create" />
+      <Button fx:id="btEnterRegMasterKey" mnemonicParsing="false" text="Создать" />
    </children>
 </VBox>

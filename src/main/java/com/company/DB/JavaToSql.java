@@ -73,7 +73,7 @@ public class JavaToSql {
     }
 
     /**
-     *  Функция, которая обновляет пароль в БД по id
+     *  Функция, которая обновляет ресурс, логин и пароль в БД по id
      * @param id
      * @param source
      * @param login
