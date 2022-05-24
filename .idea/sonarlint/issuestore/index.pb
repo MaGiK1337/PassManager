@@ -19,3 +19,5 @@ r
 Bsrc/main/java/com/company/controllers/exchanger/ExchangerData.java,c\2\c25379afbb3b72d353a69f24a19168b00653723c
 C
 10k_most_common.txt,4\f\4f69cd5900774b91147f9cfe114c60d60201a23f
+`
+0src/main/java/com/company/userdata/UserData.java,c\0\c0a0bb22f69ade88e7ff70b1b9e222260f62058c
